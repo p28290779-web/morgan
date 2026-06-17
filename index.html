@@ -1,0 +1,1574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitale National Polytechnic Student Portal</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#f1f2f8;
+}
+
+.login-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#156e37,#d4a017);
+}
+
+.login-box{
+width:420px;
+background:rgb(255, 255, 255);
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.3);
+}
+
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo-circle{
+width:100px;
+height:100px;
+border-radius:50%;
+background:linear-gradient(45deg,#156e37,#d4a017);
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;
+color:white;
+font-size:35px;
+font-weight:bold;
+}
+
+.logo h2{
+margin-top:15px;
+color:#156e37;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.login-btn{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#156e37;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.login-btn:hover{
+background:#d4a017;
+}
+
+.dashboard{
+display:none;
+}
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:260px;
+height:100vh;
+background:#156e37;
+overflow-y:auto;
+color:white;
+}
+
+.sidebar h2{
+padding:20px;
+text-align:center;
+background:#0f5028;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+padding:15px 20px;
+cursor:pointer;
+text-align:left;
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.sidebar li:hover{
+background:#d4a017;
+}
+
+.submenu{
+display:none;
+background:#1e8d46;
+}
+
+.submenu li{
+padding:12px 35px;
+font-size:14px;
+}
+
+.logout{
+background:#c0392b;
+}
+
+.main{
+margin-left:260px;
+padding:20px;
+min-height:100vh;
+}
+
+.header{
+background:linear-gradient(90deg,#156e37,#d4a017);
+color:white;
+padding:20px;
+border-radius:12px;
+display:flex;
+justify-content:space-between;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.card{
+padding:25px;
+border-radius:12px;
+color:white;
+font-size:18px;
+font-weight:bold;
+}
+
+.green{
+background:#156e37;
+}
+
+.lightgreen{
+background:#1e8d46;
+}
+
+.gold{
+background:#d4a017;
+}
+
+.darkgold{
+background:#9e7900;
+}
+
+.content{
+margin-top:20px;
+background:white;
+padding:25px;
+border-radius:15px;
+min-height:400px;
+box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th{
+background:#156e37;
+color:white;
+padding:12px;
+}
+
+td{
+padding:12px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container" id="loginPage">
+
+<div class="login-box">
+
+<div class="logo">
+
+<div class="logo-circle">
+KNP
+</div>
+
+<h2>Kitale National Polytechnic</h2>
+
+<p>Student Portal</p>
+
+</div>
+
+<input type="text"
+id="regNo"
+placeholder="Registration Number / Admin Username">
+
+<input type="email"
+id="email"
+placeholder="Student Email">
+
+<input type="password"
+id="password"
+placeholder="Password">
+
+<button class="login-btn"
+onclick="login()">
+LOGIN
+</button>
+
+</div>
+
+</div>
+
+<div class="dashboard"
+id="dashboard">
+
+<div class="sidebar">
+
+<h2>KNP PORTAL</h2>
+
+<ul>
+
+<li onclick="showContent('home')">
+Home
+</li>
+
+<li onclick="toggleMenu('academicMenu')">
+Academics
+</li>
+
+<ul class="submenu" id="academicMenu">
+
+<li onclick="showContent('admission')">
+Student Admission
+</li>
+
+<li onclick="showContent('unitreg')">
+Unit Registration
+</li>
+
+<li onclick="showContent('units')">
+Units Available
+</li>
+
+<li onclick="showContent('exam')">
+Exam Registration
+</li>
+
+<li onclick="showContent('results')">
+Result Slip
+</li>
+
+<li onclick="showContent('transcript')">
+Provisional Transcript
+</li>
+
+<li onclick="showContent('timetable')">
+Timetable
+</li>
+
+</ul>
+
+<li onclick="showContent('fees')">
+Fee Statement
+</li>
+
+<li onclick="toggleMenu('downloadMenu')">
+Downloads
+</li>
+
+<ul class="submenu"
+id="downloadMenu">
+
+<li onclick="showContent('admissionletter')">
+Admission Letter
+</li>
+
+<li onclick="showContent('examcard')">
+Exam Card
+</li>
+
+<li onclick="showContent('downloadfees')">
+Fee Statement
+</li>
+
+<li onclick="showContent('downloadresults')">
+Result Slip
+</li>
+
+<li onclick="showContent('downloadtranscript')">
+Transcript
+</li>
+
+</ul>
+
+<li onclick="toggleMenu('requestMenu')">
+Student Requests
+</li>
+
+<ul class="submenu"
+id="requestMenu">
+
+<li onclick="showContent('deferment')">
+Deferment
+</li>
+
+<li onclick="showContent('transfer')">
+Transfer Request
+</li>
+
+<li onclick="showContent('clearance')">
+Clearance Request
+</li>
+
+<li onclick="showContent('status')">
+Application Status
+</li>
+
+</ul>
+
+<li onclick="toggleMenu('electionMenu')">
+Election Site
+</li>
+
+<ul class="submenu"
+id="electionMenu">
+
+<li onclick="showContent('candidates')">
+Candidates
+</li>
+
+<li onclick="showContent('vote')">
+Vote
+</li>
+
+<li onclick="showContent('resultsElection')">
+Election Results
+</li>
+
+</ul>
+
+<li onclick="toggleMenu('adminMenu')">
+Admin Panel
+</li>
+
+<ul class="submenu"
+id="adminMenu">
+
+<li onclick="showContent('registerStudent')">
+Register Student
+</li>
+
+<li onclick="showContent('manageStudents')">
+Manage Students
+</li>
+
+<li onclick="showContent('uploadResults')">
+Upload Results
+</li>
+
+<li onclick="showContent('uploadTranscript')">
+Upload Transcript
+</li>
+
+<li onclick="showContent('manageFees')">
+Manage Fees
+</li>
+
+<li onclick="showContent('approveDeferment')">
+Approve Deferments
+</li>
+
+<li onclick="showContent('postNotices')">
+Post Notices
+</li>
+
+</ul>
+
+<li class="logout"
+onclick="logout()">
+Logout
+</li>
+
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+
+<div>
+
+<h1>
+Welcome Student Dashboard
+</h1>
+
+</div>
+
+<div>
+
+<h3 id="studentName">
+Student
+</h3>
+
+<p id="studentReg">
+</p>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card green">
+
+Billed Fee
+
+<br>
+
+KES 105,000
+
+</div>
+
+<div class="card lightgreen">
+
+Paid Fee
+
+<br>
+
+KES 75,000
+
+</div>
+
+<div class="card gold">
+
+Balance Fee
+
+<br>
+
+KES 30,000
+
+</div>
+
+<div class="card darkgold">
+
+Semester
+
+<br>
+
+september-december 2025
+
+</div>
+
+</div>
+
+<div class="content"
+id="content">
+
+<h2>Dashboard Home</h2>
+
+<br>
+
+<h3>Announcements</h3>
+
+<br>
+
+<ul>
+
+<li>
+Semester registration is ongoing.
+</li>
+
+<li>
+Fee payment deadline is 31 July.
+</li>
+
+<li>
+Examinations begin on 15 August.
+</li>
+
+<li>
+Student elections begin next month.
+</li>
+
+</ul>
+
+<br>
+
+<table>
+
+<tr>
+
+<th>
+Service
+</th>
+
+<th>
+Status
+</th>
+
+</tr>
+
+<tr>
+
+<td>
+Unit Registration
+</td>
+
+<td>
+Open
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Exam Registration
+</td>
+
+<td>
+Open
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Results
+</td>
+
+<td>
+Not Yet Posted
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Transcript
+</td>
+
+<td>
+Not Yet Posted
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<footer
+style="
+margin-top:20px;
+text-align:center;
+color:gray;
+">
+
+© 2025 Kitale National Polytechnic Student Portal
+
+</footer>
+
+</div>
+
+</div>
+
+<script>
+
+const students=[
+
+{
+regNo:"KNP/2025/001",
+email:"student@knp.ac.ke",
+password:"12345",
+name:"John Kiprono"
+}
+
+];
+
+const admins=[
+
+{
+username:"admin",
+password:"admin123",
+name:"Portal Administrator"
+}
+
+];
+
+window.userRole="student";
+
+function login(){
+
+let regNo=document.getElementById("regNo").value;
+
+let email=document.getElementById("email").value;
+
+let password=document.getElementById("password").value;
+
+let admin=admins.find(a=>
+
+a.username===regNo &&
+a.password===password
+
+);
+
+let student=students.find(s=>
+
+s.regNo===regNo &&
+s.email===email &&
+s.password===password
+
+);
+
+if(admin){
+
+window.userRole="admin";
+
+document.getElementById("studentName").innerHTML=
+admin.name;
+
+document.getElementById("studentReg").innerHTML=
+"ADMIN";
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+}
+
+else if(student){
+
+window.userRole="student";
+
+document.getElementById("studentName").innerHTML=
+student.name;
+
+document.getElementById("studentReg").innerHTML=
+student.regNo;
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+}
+
+else{
+
+alert("Invalid login details");
+
+}
+
+}
+
+function logout(){
+
+document.getElementById("dashboard").style.display="none";
+
+document.getElementById("loginPage").style.display="flex";
+
+}
+
+function toggleMenu(menu){
+
+let x=document.getElementById(menu);
+
+if(x.style.display==="block"){
+
+x.style.display="none";
+
+}
+
+else{
+
+x.style.display="block";
+
+}
+
+}
+
+function showContent(section){
+
+let content=document.getElementById("content");
+
+
+if(section==="home"){
+
+content.innerHTML=`
+
+<h2>Dashboard Home</h2>
+
+<h3>Announcements</h3>
+
+<ul>
+
+<li>Semester registration is ongoing.</li>
+
+<li>Fee payment deadline is 31 July.</li>
+
+<li>Examinations begin on 15 August.</li>
+
+<li>Student elections begin next month.</li>
+
+</ul>
+
+`;
+
+}
+
+
+
+if(section==="admission"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Student Admission</h2>
+
+<input type="text" placeholder="Student Name">
+
+<input type="text" placeholder="KCSE Index Number">
+
+<input type="text" placeholder="Programme">
+
+<input type="email" placeholder="Student Email">
+
+<input type="password" placeholder="Password">
+
+<button class="login-btn"
+onclick="registerStudent()">
+Register Student
+</button>
+
+`;
+
+}
+
+
+
+if(section==="unitreg"){
+
+content.innerHTML=`
+
+<h2>Unit Registration</h2>
+
+<table>
+
+<tr>
+
+<th>Select</th>
+
+<th>Code</th>
+
+<th>Unit Name</th>
+
+</tr>
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>ICT2201</td>
+
+<td>Programming</td>
+
+</tr>
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>ICT2202</td>
+
+<td>Database Systems</td>
+
+</tr>
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>ICT2203</td>
+
+<td>Networking</td>
+
+</tr>
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>ICT2204</td>
+
+<td>Web Development</td>
+
+</tr>
+
+</table>
+<button class="login-btn"
+onclick="Regestunitst()">
+regest units
+</button>
+
+`;
+
+}
+
+
+
+if(section==="units"){
+
+content.innerHTML=`
+
+<h2>Units Available</h2>
+
+<table>
+
+<tr>
+
+<th>Department</th>
+
+<th>Units</th>
+
+</tr>
+
+<tr>
+
+<td>ICT</td>
+
+<td>Programming, Networking, Web Development</td>
+
+</tr>
+
+<tr>
+
+<td>Business</td>
+
+<td>Accounting, Economics</td>
+
+</tr>
+
+<tr>
+
+<td>Electrical Engineering</td>
+
+<td>Electronics, Installation</td>
+
+</tr>
+
+</table>
+
+`;
+
+}
+
+
+
+if(section==="exam"){
+
+content.innerHTML=`
+
+<h2>Exam Registration</h2>
+
+<input type="text" placeholder="Semester">
+
+<input type="text" placeholder="Academic Year">
+
+<button class="login-btn"
+onclick="Regestexermination()">
+Regest exermination
+</button>
+
+`;
+
+}
+
+
+
+if(section==="results"){
+
+content.innerHTML=`
+
+<h2>Result Slip</h2>
+
+<h3 style="color:red">
+
+RESULTS NOT YET POSTED
+
+</h3>
+
+`;
+
+}
+
+
+
+if(section==="transcript"){
+
+content.innerHTML=`
+
+<h2>Provisional Transcript</h2>
+
+<h3 style="color:red">
+
+TRANSCRIPT NOT YET POSTED
+
+</h3>
+
+`;
+
+}
+
+
+
+if(section==="timetable"){
+
+content.innerHTML=`
+
+<h2>Class Timetable</h2>
+
+<table>
+
+<tr>
+
+<th>Day</th>
+
+<th>Unit</th>
+
+</tr>
+
+<tr>
+
+<td>Monday</td>
+
+<td>Programming</td>
+
+</tr>
+
+<tr>
+
+<td>Tuesday</td>
+
+<td>Networking</td>
+
+</tr>
+
+<tr>
+
+<td>Wednesday</td>
+
+<td>Web Development</td>
+
+</tr>
+
+</table>
+
+`;
+
+}
+
+
+
+if(section==="fees"){
+
+content.innerHTML=`
+
+<h2>Fee Statement</h2>
+
+<table>
+
+<tr>
+
+<th>Billed</th>
+
+<th>Paid</th>
+
+<th>Balance</th>
+
+</tr>
+
+<tr>
+
+<td>105,000</td>
+
+<td>75,000</td>
+
+<td>30,000</td>
+
+</tr>
+
+</table>
+
+<button class="login-btn">
+
+Download Fee Statement
+
+</button>
+
+`;
+
+}
+
+
+
+if(section==="admissionletter"){
+
+content.innerHTML=`
+
+<h2>Admission Letter</h2>
+
+<button class="login-btn"
+onclick="Downloadadmissionletter()">
+Download admission letter
+</button>
+`;
+
+}
+
+
+
+if(section==="examcard"){
+
+content.innerHTML=`
+
+<h2>Exam Card</h2>
+
+<button class="login-btn"
+onclick="Downloadexamcard()">
+Download exam card
+</button>
+`;
+
+}
+
+if(section==="downloadfees"){
+
+content.innerHTML=`
+
+<h2>Fee Statement</h2>
+
+<button class="login-btn"
+onclick="Dowloadfeestatement()">
+download fee statement
+</button>
+
+`;
+
+}
+
+
+
+if(section==="downloadresults"){
+
+content.innerHTML=`
+
+<h2>Result Slip</h2>
+
+<h3 style="color:red">
+
+RESULTS NOT YET POSTED
+
+</h3>
+
+`;
+
+}
+
+
+
+if(section==="downloadtranscript"){
+
+content.innerHTML=`
+
+<h2>Transcript</h2>
+
+<h3 style="color:red">
+
+TRANSCRIPT NOT YET POSTED
+
+</h3>
+
+`;
+
+}
+
+
+
+if(section==="deferment"){
+
+content.innerHTML=`
+
+<h2>Deferment Application</h2>
+
+<input type="text" placeholder="Reason">
+
+<textarea placeholder="Explanation"></textarea>
+
+<button class="login-btn"
+onclick="submitDeferment()">
+Submit Application
+</button>
+
+`;
+
+}
+
+
+
+if(section==="transfer"){
+
+content.innerHTML=`
+
+<h2>Transfer Request</h2>
+
+<input type="text" placeholder="Programme Requested">
+
+<textarea placeholder="Reason"></textarea>
+
+<button class="login-btn"
+onclick="submitTransfer()">
+Submit Request
+</button>
+
+`;
+
+}
+
+
+
+if(section==="clearance"){
+
+content.innerHTML=`
+
+<h2>Clearance Request</h2>
+
+<button class="login-btn"
+onclick="Submitclearanceform()">
+submit clearance form
+</button>
+
+`;
+
+}
+
+
+
+if(section==="status"){
+
+content.innerHTML=`
+
+<h2>Application Status</h2>
+
+<table>
+
+<tr>
+
+<th>Application</th>
+
+<th>Status</th>
+
+</tr>
+
+<tr>
+
+<td>Deferment</td>
+
+<td>Pending</td>
+
+</tr>
+
+<tr>
+
+<td>Transfer</td>
+
+<td>No Active Request</td>
+
+</tr>
+
+</table>
+
+`;
+
+}
+
+
+
+if(section==="candidates"){
+
+content.innerHTML=`
+
+<h2>Election Candidates</h2>
+
+<table>
+
+<tr>
+
+<th>Position</th>
+
+<th>Candidate</th>
+
+</tr>
+
+<tr>
+
+<td>Chairperson</td>
+
+<td>Mary Wanjiru</td>
+
+</tr>
+
+<tr>
+
+<td>Secretary General</td>
+
+<td>Brian Kiptoo</td>
+
+</tr>
+
+<tr>
+
+<td>Treasurer</td>
+
+<td>Faith Atieno</td>
+
+</tr>
+
+</table>
+
+`;
+
+}
+
+
+
+if(section==="vote"){
+
+content.innerHTML=`
+
+<h2>Voting Page</h2>
+
+<p>
+
+Voting currently in progress.
+
+</p>
+
+<button class="login-btn"
+onclick="submitvote()">
+Submit vote
+</button>
+
+
+
+`;
+
+}
+
+
+
+if(section==="resultsElection"){
+
+content.innerHTML=`
+
+<h2>Election Results</h2>
+
+<p>
+
+Voting In Progress
+
+</p>
+
+`;
+
+}
+
+
+
+if(section==="registerStudent"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Register Student</h2>
+
+<input type="text" placeholder="Student Name">
+
+<input type="text" placeholder="Registration Number">
+
+<input type="email" placeholder="Student Email">
+
+<input type="password" placeholder="Password">
+
+<button class="login-btn"
+onclick="registerStudent()">
+Register Student
+</button>
+`;
+
+}
+
+
+
+if(section==="manageStudents"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Manage Students</h2>
+
+<table>
+
+<tr>
+
+<th>Registration Number</th>
+
+<th>Name</th>
+
+</tr>
+
+<tr>
+
+<td>KNP/2025/001</td>
+
+<td>John Kiprono</td>
+
+</tr>
+
+</table>
+
+`;
+
+}
+
+
+
+if(section==="uploadResults"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Upload Results</h2>
+
+<input type="text" placeholder="Registration Number">
+
+<input type="text" placeholder="Unit Code">
+
+<input type="text" placeholder="Grade">
+
+<button class="login-btn"
+onclick="uploadResult()">
+Upload Result
+</button>
+
+`;
+
+}
+
+
+
+if(section==="uploadTranscript"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Upload Transcript</h2>
+
+<input type="text" placeholder="Registration Number">
+
+<input type="text" placeholder="Semester">
+
+<button class="login-btn"
+onclick="uploadTranscript()">
+Upload Transcript
+</button>
+`;
+
+}
+
+
+
+if(section==="manageFees"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Manage Fees</h2>
+
+<p>
+
+Finance management page.
+
+</p>
+
+`;
+
+}
+
+
+
+if(section==="approveDeferment"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Approve Deferments</h2>
+
+<button class="login-btn"
+onclick="aprove()">
+aprove
+</button>
+
+`;
+
+}
+
+
+
+if(section==="postNotices"){
+
+if(window.userRole!=="admin"){
+
+content.innerHTML="<h2>Access Denied</h2>";
+
+return;
+
+}
+
+content.innerHTML=`
+
+<h2>Post Notice</h2>
+
+<textarea placeholder="Write notice"></textarea>
+
+<button class="login-btn"
+onclick="publishNotice()">
+Publish Notice
+</button>
+
+`;
+
+}
+
+}
+function registerStudent(){
+
+alert("Student registered successfully");
+
+}
+
+function submitDeferment(){
+
+alert("Application submitted successfully");
+
+}
+
+function submitTransfer(){
+
+alert("Transfer request submitted");
+
+}
+
+function publishNotice(){
+
+alert("Notice published successfully");
+
+}
+
+function uploadResult(){
+
+alert("Result uploaded successfully");
+
+}
+
+function uploadTranscript(){
+
+alert("Transcript uploaded successfully");
+
+}
+</script>
+
+</body>
+</html>
+
